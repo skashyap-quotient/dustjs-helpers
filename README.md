@@ -1,4 +1,10 @@
-# Dust Helpers  [![Build Status](https://secure.travis-ci.org/linkedin/dustjs-helpers.png)](http://travis-ci.org/linkedin/dustjs-helpers)
+**Important**: This is a Dust Helpers (Linkedin) version 1.7.4 with only security dependencies fixed. 
+
+```
+npm install dustjs-helpers-fixed
+```
+
+# Dust Helpers 
 
 This repository holds context helpers for Dust.
 
