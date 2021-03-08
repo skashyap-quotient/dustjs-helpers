@@ -18,8 +18,8 @@ module.exports = function (grunt) {
       helpersMin: '<%=paths.build%>/dust-helpers.min.js',
       test: '<%=paths.project%>/test',
       testSpecs: '<%=paths.test%>/jasmine-test/spec',
-      dust: '<%=paths.project%>/node_modules/dustjs-linkedin/dist/dust-full.js',
-      dustMin: '<%=paths.project%>/node_modules/dustjs-linkedin/dist/dust-full.min.js',
+      dust: '<%=paths.project%>/node_modules/dustjs-linkedin-fixed/dist/dust-full.js',
+      dustMin: '<%=paths.project%>/node_modules/dustjs-linkedin-fixed/dist/dust-full.min.js',
       dist: '<%=paths.project%>/dist',
       archive: '<%=paths.project%>/archive',
     },
@@ -194,18 +194,6 @@ module.exports = function (grunt) {
         tasks: ['testPhantom'],
       },
     },
-    githubChanges: {
-      dist: {
-        options: {
-          owner: 'linkedin',
-          repository: 'dustjs-helpers',
-          tagName: 'v<%= pkg.version %>',
-          onlyPulls: true,
-          useCommitBody: true,
-          auth: true,
-        },
-      },
-    },
   });
 
   //--------------------------------------------------
@@ -259,7 +247,7 @@ module.exports = function (grunt) {
   grunt.registerTask('coverage', ['jasmine:coverage', 'log:coverage']);
 
   //release tasks
-  grunt.registerTask('buildRelease', ['test', 'githubChanges', 'copy:release']);
+  grunt.registerTask('buildRelease', ['test', 'copy:release']);
   grunt.registerTask('releasePatch', ['bump-only:patch', 'buildRelease', 'bump-commit']);
   grunt.registerTask('releaseMinor', ['bump-only:minor', 'buildRelease', 'bump-commit']);
 

@@ -1,42 +1,41 @@
 /*global expect:true,process:true,describe:true,it:true,helpersTests:true*/
 
-(function(root, factory) {
+(function (root, factory) {
   if (typeof exports === 'object') {
     // in Node, require dust and helpers tests
-    module.exports = factory(require('dustjs-linkedin'), require('./helpersTests.js'));
+    module.exports = factory(require('dustjs-linkedin-fixed'), require('./helpersTests.js'));
   } else {
     // in the browser use global dust and helpersTests objects
     factory(root.dust, root.helpersTests);
   }
-}(this, function(dust, coreTests) {
-
+})(this, function (dust, coreTests) {
   var isRhino = typeof isRhino !== 'undefined';
-  describe ('Render', function() {
+  describe('Render', function () {
     for (var index = 0; index < coreTests.length; index++) {
       for (var i = 0; i < coreTests[index].tests.length; i++) {
         var test = coreTests[index].tests[i];
         if (!isRhino || !test.disabled_in_rhino) {
-          it (test.message, render(test));
+          it(test.message, render(test));
         }
       }
     }
   });
-  describe ('Stream', function() {
+  describe('Stream', function () {
     for (var index = 0; index < coreTests.length; index++) {
       for (var i = 0; i < coreTests[index].tests.length; i++) {
         var test = coreTests[index].tests[i];
         if (!isRhino || !test.disabled_in_rhino) {
-          it (test.message, stream(test));
+          it(test.message, stream(test));
         }
       }
     }
   });
-  describe ('Pipe', function() {
+  describe('Pipe', function () {
     for (var index = 0; index < coreTests.length; index++) {
       for (var i = 0; i < coreTests[index].tests.length; i++) {
         var test = coreTests[index].tests[i];
         if (!isRhino || !test.disabled_in_rhino) {
-          it (test.message, pipe(test));
+          it(test.message, pipe(test));
         }
       }
     }
@@ -46,17 +45,18 @@
     dust.loadSource(dust.compile(test.source, test.name));
     var context = test.context;
     if (test.base) {
-       context = dust.makeBase(test.base).push(context);
+      context = dust.makeBase(test.base).push(context);
     }
     return context;
   }
 
   function messageInLog(log, message, level) {
-    var i, ret = false;
+    var i,
+      ret = false;
     log = log || [];
-    for(i = 0; i < log.length; i++) {
-      if(log[i].message.indexOf(message) > -1) {
-        ret = (!level || log[i].level === level);
+    for (i = 0; i < log.length; i++) {
+      if (log[i].message.indexOf(message) > -1) {
+        ret = !level || log[i].level === level;
         break;
       }
     }
@@ -66,8 +66,8 @@
   // Absorb all logs into a log queue for testing purposes
   var dustLog = dust.log;
   dust.logQueue = [];
-  dust.log = function(msg, type) {
-    if(msg instanceof Error) {
+  dust.log = function (msg, type) {
+    if (msg instanceof Error) {
       msg = msg.message;
     }
     dust.logQueue.push({ message: msg, type: type });
@@ -76,12 +76,12 @@
 
   function render(test) {
     function checkRender(done) {
-      return function(err, output) {
+      return function (err, output) {
         if (test.error) {
           err = err.message || err;
           expect(err).toContain(test.error);
         } else {
-          if(err) {
+          if (err) {
             expect(err.message).toBeNull();
           }
         }
@@ -94,23 +94,23 @@
         done();
       };
     }
-    return function(done) {
+    return function (done) {
       var check = checkRender(done);
       try {
         var ctx = prepare(test);
         dust.render(test.name, ctx, check);
-      } catch(err) {
+      } catch (err) {
         check(err);
       }
     };
   }
 
   function checkStream(done) {
-    return function(test, result) {
+    return function (test, result) {
       if (test.error) {
         expect(result.error).toContain(test.error);
       } else {
-        if(result.error) {
+        if (result.error) {
           expect(result.error).toBeNull();
         }
       }
@@ -125,18 +125,25 @@
   }
 
   function stream(test) {
-    return function(done) {
+    return function (done) {
       var result = { output: '' };
       var check = checkStream(done);
       var ctx;
 
       try {
         ctx = prepare(test);
-        dust.stream(test.name, ctx)
-        .on('data', function(data) { result.output += data; })
-        .on('end', function() { check(test, result); })
-        .on('error', function(err) { result.error = err.message || err; });
-      } catch(err) {
+        dust
+          .stream(test.name, ctx)
+          .on('data', function (data) {
+            result.output += data;
+          })
+          .on('end', function () {
+            check(test, result);
+          })
+          .on('error', function (err) {
+            result.error = err.message || err;
+          });
+      } catch (err) {
         check(test, { error: err.message || err });
       }
     };
@@ -153,24 +160,24 @@
     function end() {
       cb({
         data: _this.data,
-        error: _this.error ? _this.error.toString() : undefined
+        error: _this.error ? _this.error.toString() : undefined,
       });
     }
 
     function emit(e, data) {
-      switch(e) {
+      switch (e) {
         case 'pipe':
-          data.on('error', function(err) {
+          data.on('error', function (err) {
             _this.error = err;
           });
-        break;
+          break;
       }
     }
 
     return {
       write: write,
       end: end,
-      emit: emit
+      emit: emit,
     };
   }
 
@@ -178,12 +185,12 @@
     var calls = 0;
 
     function checkPipe(test, done) {
-      return function(result) {
+      return function (result) {
         calls++;
         if (test.error) {
           expect(result.error).toContain(test.error);
         } else {
-          if(result.error) {
+          if (result.error) {
             expect(result.error).toBeNull();
           }
         }
@@ -193,23 +200,23 @@
         if (typeof test.expected !== 'undefined') {
           expect(test.expected).toEqual(result.data);
         }
-        if(calls === 2) {
+        if (calls === 2) {
           done();
         }
       };
     }
 
-    return function(done) {
+    return function (done) {
       try {
         var ctx = prepare(test);
-        dust.stream(test.name, ctx)
-            .pipe(new WritableStream(checkPipe(test, done)))
-            .pipe(new WritableStream(checkPipe(test, done)));
-      } catch(err) {
+        dust
+          .stream(test.name, ctx)
+          .pipe(new WritableStream(checkPipe(test, done)))
+          .pipe(new WritableStream(checkPipe(test, done)));
+      } catch (err) {
         expect(err.message).toContain(test.error);
         done();
       }
     };
   }
-
-}));
+});
