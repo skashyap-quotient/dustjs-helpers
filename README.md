@@ -3,7 +3,7 @@ Link to source (from where this has been forked from) - [https://github.com/kurd
 This is a Dust Helpers (Linkedin) version 1.7.4 with only security dependencies fixed. 
 
 ```
-npm install dustjs-helpers-fixed
+npm install dustjs-helpers-fixed-with-source
 ```
 
 # Dust Helpers 
