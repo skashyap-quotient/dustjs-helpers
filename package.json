@@ -1,5 +1,5 @@
 {
-  "name": "dustjs-helpers-fixed",
+  "name": "dustjs-helpers-fixed-with-source",
   "version": "1.8.1",
   "author": {
     "name": "Aleksander Williams",
@@ -27,7 +27,7 @@
   "main": "./lib/dust-helpers",
   "repository": {
     "type": "git",
-    "url": "https://github.com/linkedin/dustjs-helpers.git"
+    "url": "https://github.com/skashyap-quotient/dustjs-helpers"
   },
   "keywords": [
     "templates",

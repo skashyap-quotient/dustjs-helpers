@@ -1,4 +1,6 @@
-**Important**: This is a Dust Helpers (Linkedin) version 1.7.4 with only security dependencies fixed. 
+**Important**: This is a copy of [https://www.npmjs.com/package/dustjs-helpers-fixed](https://www.npmjs.com/package/dustjs-helpers-fixed) but with the correct link to repository. Shall archive this if the original author updates their sources for the npm package.  
+Link to source (from where this has been forked from) - [https://github.com/kurdin/dustjs-helpers](https://github.com/kurdin/dustjs-helpers)   
+This is a Dust Helpers (Linkedin) version 1.7.4 with only security dependencies fixed. 
 
 ```
 npm install dustjs-helpers-fixed
