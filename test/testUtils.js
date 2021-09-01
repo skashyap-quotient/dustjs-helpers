@@ -9,4 +9,4 @@
   if (typeof exports !== 'undefined') {
     module.exports = dust;
   }
-})(typeof exports !== 'undefined' ? require('dustjs-linkedin-fixed') : dust);
+})(typeof exports !== 'undefined' ? require('dustjs-linkedin-fixed-with-source') : dust);

@@ -1,6 +1,6 @@
 {
   "name": "dustjs-helpers-fixed-with-source",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "author": {
     "name": "Aleksander Williams",
     "url": "http://akdubya.github.com/dustjs"
@@ -39,10 +39,10 @@
     "linkedin"
   ],
   "peerDependencies": {
-    "dustjs-linkedin-fixed": "2.7 - 2.9"
+    "dustjs-linkedin-fixed-with-source": "2.7 - 2.9"
   },
   "devDependencies": {
-    "dustjs-linkedin-fixed": "2.7 - 2.8",
+    "dustjs-linkedin-fixed-with-source": "2.7 - 2.8",
     "grunt": "~0.4.2",
     "grunt-bump": "~0.3.0",
     "grunt-cli": "~0.1.13",

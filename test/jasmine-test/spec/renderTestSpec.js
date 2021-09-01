@@ -3,7 +3,7 @@
 (function (root, factory) {
   if (typeof exports === 'object') {
     // in Node, require dust and helpers tests
-    module.exports = factory(require('dustjs-linkedin-fixed'), require('./helpersTests.js'));
+    module.exports = factory(require('dustjs-linkedin-fixed-with-source'), require('./helpersTests.js'));
   } else {
     // in the browser use global dust and helpersTests objects
     factory(root.dust, root.helpersTests);

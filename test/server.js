@@ -1,7 +1,7 @@
 var uutest = require('./uutest'),
   helpersTests = require('./jasmine-test/spec/helpersTests'),
   coreSetup = require('./core').coreSetup,
-  dust = require('dustjs-linkedin-fixed');
+  dust = require('dustjs-linkedin-fixed-with-source');
 
 //Add the tapper helper to test the Tap helper.
 require('./testUtils');

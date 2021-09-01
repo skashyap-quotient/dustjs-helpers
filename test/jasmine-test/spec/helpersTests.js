@@ -1660,4 +1660,4 @@
   } else {
     this.helpersTests = helpersTests; // We're on the browser
   }
-})(typeof exports !== 'undefined' ? require('dustjs-linkedin-fixed') : dust);
+})(typeof exports !== 'undefined' ? require('dustjs-linkedin-fixed-with-source') : dust);
